@@ -7,7 +7,7 @@ akash|2020|2021|2022|2023|2021|
 *juno|2070|2071|2072|2073|2071|
 *sifnode|2110|2111|2112|2113|2111|8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656
 *anon|2100|2101|2102|2103|2101|
-*starname|2050|2051|2052|2053|2051|
+*starname|2050|2051|2052|2053|2051|ca133187b37b59d2454812cfcf31b6211395adec@167.99.194.126:16656,1c7e014b65f7a3ea2cf48bffce78f5cbcad2a0b7@13.37.85.253:26656,8c64a2127cc07d4570756b61f83af60d34258398@13.37.61.32:26656,9aabe0ac122f3104d8fc098e19c66714c6f1ace9@3.37.140.5:26656,faedef1969911d24bf72c56fc01326eb891fa3b7@63.250.53.45:16656,94ac1c02b4e2ca3fb2706c91a68b8030ed3615a1@35.247.175.128:16656,be2235996b1c785a9f57eed25fd673ca111f0bae@52.52.89.64:26656,f63d15ab7ed55dc75f332d0b0d2b01d529d5cbcd@212.71.247.11:26656,f5597a7ed33bc99eb6ba7253eb8ac76af27b4c6d@138.201.20.147:26656
 *chain-main|2040|2041|2042|2043|2041|
 *omniflixhub|2120|2121|2122|2123|2121|
 *e-money|2090|2091|2092|2093|2091|
@@ -122,3 +122,17 @@ There is a problem with sifnode:
 ```
 Error: error during handshake: error on replay: validator set is nil in genesis and still empty after InitChain
 ```
+
+# Starname
+```bash
+git clone https://github.com/iov-one/starnamed.git
+cd starnamed
+make install
+starnamed init notional --chain-id iov-mainnet-ibc
+wget -O ~/.starnamed/config/genesis.json https://gist.githubusercontent.com/davepuchyr/6bea7bf369064d118195e9b15ea08a0f/raw/genesis.json
+nano /etc/systemd/system/starname.service # Make a systemd file with variables from above table
+systemctl daemon-reload
+systemctl enable starname
+systemctl start starname
+```
+Till now, there still aren't any errors when starting `starname`.
