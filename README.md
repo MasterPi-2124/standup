@@ -10,8 +10,8 @@ akash|2020|2021|2022|2023|2021|
 *starname|2050|2051|2052|2053|2051|
 *chain-main|2040|2041|2042|2043|2041|
 *omniflixhub|2120|2121|2122|2123|2121|
-*dig|2090|2091|2092|2093|2091|stopped
-*persistencecore|2080|2081|2082|2083|2081|
+*e-money|2090|2091|2092|2093|2091|
+*persistencecore|2080|2081|2082|2083|2081|876946a947850952383347724206d067d7032b22@3.137.86.151:26656<br />ecc00c5a7abd057ea5ca4a94c48d1d937bbab34a@34.118.19.56:26656<br />ac7e6aab726e842b92c06b8ebbf5a3616872ee80@128.1.133.107:26656<br />b9dab7a1a5ffd16d43b19e40a8020db84e8dfffd@3.14.116.246:44456<br />60385a36ea72a2985bd8450c95b8df8be2adebb8@54.95.235.242:26656<br />a92ff1da2020e5cbc9b05527e9e39c34a84e8a27@34.72.57.218:26656<br />e15524629aee25fea01f62d26c4e062bfda94b70@35.247.171.7:26656<br />7c106099b8d07085431a97387e5a5db2d1ecd71d@18.223.209.36:26656<br />b19a3cf4d9938b41539729d027bf2e3c1a4e1fbb@85.214.130.157:26656<br />7cc92a9e3dcad37e5e7b3adf7814c37070fa9787@161.97.187.189:26656<br />7b9839cd3e994c44cbd747d1ddc51ee695f60e58@157.90.134.48:26656<br />cfb529bd0325fc884296518655f1f315bc42dd0c@185.144.83.165:26656<br />01102f3c84e6602e30e1e39498e242cbb60a0b73@178.62.103.7:26656
 *osmosis|2000|2001|2002|2003|2001|
 *umee|2030|2031|2032|2033|2031|a9a84866786013f75138388fbf12cdfc425bd39c@137.184.69.184:26656<br />684dd9ce7746041d0453322808cc5b238861e386@137.184.65.210:26656<br /> c4c425c66d2941ce4d5d98185aa90d2330de5efd@143.244.166.155:26656<br /> eb42bdbd821fad7bd0048a741237625b4d954d18@143.244.165.138:26656
 *ixo|2130|2131|2132|2133|2131|not found
@@ -74,7 +74,7 @@ systemctl daemon-reload
 systemctl enable sentinel
 systemctl start sentinel
 ```
-Till now, there still aren't any errors when starting `gaia`.
+Till now, there still aren't any errors when starting `sentinel`.
 
 # Irisnet
 ```bash
@@ -94,4 +94,16 @@ There is a problem with iris:
 panic: unknown field "pending_htlcs" in types.GenesisState
 ```
 
-# 
+# PersistenceCore
+```bash
+git clone https://github.com/persistenceOne/persistenceCore.git
+cd persistenceCore
+make install
+persistenceCore init notional --chain-id core-1
+wget -O ~/.persistenceCore/config/genesis.json https://raw.githubusercontent.com/persistenceOne/genesisTransactions/master/core-1/final_genesis.json
+nano /etc/systemd/system/persistencecore.service # Make a systemd file with variables from above table
+systemctl daemon-reload
+systemctl enable persistencecore
+systemctl start persistencecore
+```
+Till now, there still aren't any errors when starting `persistencecore`.
